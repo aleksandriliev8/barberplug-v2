@@ -1,0 +1,33 @@
+# Local development environment.
+# backend and frontend services are added once those projects exist.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: barberplug
+      POSTGRES_USER: barberplug
+      POSTGRES_PASSWORD: barberplug
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U barberplug -d barberplug"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Local stand-in for AWS S3 (gallery images) and SES (contact emails).
+  localstack:
+    image: localstack/localstack:3.8
+    environment:
+      SERVICES: s3,ses
+      AWS_DEFAULT_REGION: eu-central-1
+    ports:
+      - "4566:4566"
+    volumes:
+      - localstack-data:/var/lib/localstack
+
+volumes:
+  postgres-data:
+  localstack-data:
