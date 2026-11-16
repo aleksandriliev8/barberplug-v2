@@ -19,4 +19,5 @@ docker compose up -d
 
 - [GLOSSARY.md](GLOSSARY.md): domain terms
 - [docs/adr/](docs/adr/): architecture decisions
+- [docs/roadmap.md](docs/roadmap.md): build stages
 - [design-system/barberplug/MASTER.md](design-system/barberplug/MASTER.md): design system (colours, type, components)

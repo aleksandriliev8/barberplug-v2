@@ -26,6 +26,10 @@ _Avoid_: Picture, photo, media
 A predefined title or paragraph on a page whose Bulgarian and English wording the Owner can change.
 _Avoid_: Content block, CMS field, copy
 
+**Opening Hours**:
+The days and times the shop is open, edited by the Owner in the admin area and shown on the Location Section and in the footer.
+_Avoid_: Schedule, working time, availability
+
 **Contact Message**:
 A message a Visitor sends to the shop through the Help form.
 _Avoid_: Inquiry, ticket, lead
