@@ -17,4 +17,4 @@ Ground rules for every stage:
 5. **Editable Texts and Opening Hours**: storage, admin editors, public pages reading them.
 6. **Public Sections**: Home, Learn More, Shop (coming soon), Location, Help with Contact Messages (Postgres + SES).
 7. **SEO**: prerendered pages per Locale, meta tags, `hreflang`, sitemap, robots.txt.
-8. **AWS**: Terraform (VPC, ECS Fargate, ALB, RDS, S3, CloudFront, SES, Route 53) and a deploy pipeline.
+8. **AWS**: Terraform (VPC, ECS Fargate, ALB, RDS, S3, CloudFront, SES, Route 53) and a deploy pipeline. CloudFront must 301 `/` to `/bg`, rewrite `/bg/gallery` to `/bg/gallery/index.html`, and serve `index.html` (the SPA shell) for unknown paths.

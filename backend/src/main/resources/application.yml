@@ -3,7 +3,7 @@ spring:
     name: barberplug
   datasource:
     # Defaults match docker-compose.yml; production overrides them with env vars.
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/barberplug}
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/barberplug}
     username: ${DB_USERNAME:barberplug}
     password: ${DB_PASSWORD:barberplug}
   jpa:
