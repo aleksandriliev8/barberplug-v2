@@ -40,7 +40,7 @@ Apply the light set with a `.surface-light` class on a section; the default is d
 
 | Token | Size | Use |
 |---|---|---|
-| `--type-display` | `clamp(3rem, 9vw, 8rem)` / lh 0.95 | Hero headline |
+| `--type-display` | `clamp(2.25rem, 12vw, 8rem)` / lh 0.95 | Hero headline (min lowered from 3rem so long Bulgarian words like ПОДСТРИГВАНЕ fit at 320px without breaking mid-word) |
 | `--type-h1` | `clamp(2.25rem, 5vw, 4rem)` / lh 1.05 | Page title |
 | `--type-h2` | `clamp(1.75rem, 3.5vw, 2.75rem)` / lh 1.1 | Section title |
 | `--type-h3` | `1.25rem` / lh 1.3 | Card title |
