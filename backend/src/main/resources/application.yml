@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: barberplug
+  datasource:
+    # Defaults match docker-compose.yml; production overrides them with env vars.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/barberplug}
+    username: ${DB_USERNAME:barberplug}
+    password: ${DB_PASSWORD:barberplug}
+  jpa:
+    # Flyway owns the schema; Hibernate only checks that entities match it.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
