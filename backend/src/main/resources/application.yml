@@ -1,6 +1,9 @@
 spring:
   application:
     name: barberplug
+  config:
+    # Local secrets (OWNER_EMAIL, ...) can live in backend/.env, which git ignores.
+    import: optional:file:.env[.properties]
   datasource:
     # Defaults match docker-compose.yml; production overrides them with env vars.
     url: ${DB_URL:jdbc:postgresql://localhost:5433/barberplug}
@@ -17,6 +20,23 @@ spring:
 server:
   port: ${PORT:8080}
   shutdown: graceful
+  # Behind the ALB: trust X-Forwarded-For from private addresses, so the
+  # login rate limit sees the Visitor's IP instead of the load balancer's.
+  forward-headers-strategy: native
+  servlet:
+    session:
+      timeout: 8h
+      cookie:
+        name: BP_SESSION
+        http-only: true
+        secure: true
+        same-site: lax
+
+barberplug:
+  owner:
+    # Only used to create the Owner on first start (ADR-0006).
+    email: ${OWNER_EMAIL:}
+    initial-password: ${OWNER_INITIAL_PASSWORD:}
 
 management:
   endpoints:

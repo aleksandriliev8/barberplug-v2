@@ -1,5 +1,5 @@
 # Local development environment.
-# backend and frontend services are added once those projects exist.
+# Only the services the app depends on run here; backend and frontend run directly on the host.
 services:
   postgres:
     image: postgres:16-alpine

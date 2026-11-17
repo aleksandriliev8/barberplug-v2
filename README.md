@@ -15,10 +15,13 @@ Needs Java 21, Node 24 (at least 22.22) and Docker.
 
 ```sh
 docker compose up -d            # Postgres + LocalStack
+cp backend/.env.example backend/.env   # Owner account created on first start
 
 cd backend && ./mvnw spring-boot:run   # API on http://localhost:8080
 cd frontend && npm install && npm run dev   # site on http://localhost:5173/bg
 ```
+
+Admin area: `http://localhost:5173/admin`, sign in with the values from `backend/.env`. The dev server proxies `/api` to the backend.
 
 Tests: `./mvnw verify` in `backend/`, `npm test` and `npm run typecheck` in `frontend/`. CI runs both on every push and pull request to `develop` and `main`.
 
