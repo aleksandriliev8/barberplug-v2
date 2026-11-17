@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
   useParams,
 } from "react-router";
 
@@ -29,9 +30,12 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: ReactNode }) {
   const { lang } = useParams();
+  const { pathname } = useLocation();
+  // The admin area is in English for now (app/admin/messages.ts).
+  const htmlLang = pathname.startsWith("/admin") ? "en" : isLocale(lang) ? lang : DEFAULT_LOCALE;
 
   return (
-    <html lang={isLocale(lang) ? lang : DEFAULT_LOCALE}>
+    <html lang={htmlLang}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,6 +50,11 @@ export function Layout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
+}
+
+/** Shown while the SPA shell loads route code (admin pages, unknown paths): the plain black page. */
+export function HydrateFallback() {
+  return null;
 }
 
 export default function App() {
