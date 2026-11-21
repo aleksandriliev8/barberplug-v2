@@ -42,6 +42,8 @@ class SecurityConfig {
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/auth/csrf").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        // Public content for Visitors.
+                        .requestMatchers(HttpMethod.GET, "/api/gallery").permitAll()
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.csrfTokenRepository(csrfTokens)

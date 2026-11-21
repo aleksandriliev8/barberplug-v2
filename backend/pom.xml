@@ -19,7 +19,23 @@
 
     <properties>
         <java.version>21</java.version>
+        <aws-sdk.version>2.59.3</aws-sdk.version>
+        <webp-imageio.version>0.11.0</webp-imageio.version>
+        <twelvemonkeys.version>3.15.3</twelvemonkeys.version>
+        <metadata-extractor.version>2.22.0</metadata-extractor.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws-sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -50,6 +66,29 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
+        <!-- Gallery: S3 storage (LocalStack locally) and image processing (ADR-0003). -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+        </dependency>
+        <dependency>
+            <!-- WebP encoder/decoder with bundled native libwebp. -->
+            <groupId>com.github.usefulness</groupId>
+            <artifactId>webp-imageio</artifactId>
+            <version>${webp-imageio.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Robust JPEG reader (CMYK, odd encoders) for ImageIO. -->
+            <groupId>com.twelvemonkeys.imageio</groupId>
+            <artifactId>imageio-jpeg</artifactId>
+            <version>${twelvemonkeys.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Reads the EXIF orientation so photos are turned upright before metadata is dropped. -->
+            <groupId>com.drewnoakes</groupId>
+            <artifactId>metadata-extractor</artifactId>
+            <version>${metadata-extractor.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -79,6 +118,11 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>localstack</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
