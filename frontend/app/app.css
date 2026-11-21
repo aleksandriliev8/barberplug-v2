@@ -49,6 +49,20 @@
   --radius-input: 4px;
 
   --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Scroll/load reveal: fade + 16px rise (MASTER.md motion). Off with reduced motion (see base). */
+  --animate-reveal: reveal 400ms var(--ease-enter) both;
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 /* Light section: same token names, light values. The default surface is dark. */

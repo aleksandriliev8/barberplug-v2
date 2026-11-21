@@ -27,6 +27,20 @@ type Messages = {
     rights: string;
   };
   notFound: { title: string; body: string; backHome: string };
+  gallery: {
+    loading: string;
+    empty: string;
+    error: string;
+    retry: string;
+    viewer: string;
+    openPhoto: (position: number) => string;
+    close: string;
+    previous: string;
+    next: string;
+    counter: (position: number, total: number) => string;
+    /** Alt text when a photo has no caption (MASTER.md). */
+    altFallback: string;
+  };
   error: { title: string; body: string };
 };
 
@@ -66,6 +80,19 @@ const en: Messages = {
     phone: "Phone",
     followUs: "Follow us",
     rights: "All rights reserved.",
+  },
+  gallery: {
+    loading: "Loading photos…",
+    empty: "Photos are coming soon.",
+    error: "The gallery could not be loaded.",
+    retry: "Try again",
+    viewer: "Photo viewer",
+    openPhoto: (position) => `Open photo ${position}`,
+    close: "Close",
+    previous: "Previous photo",
+    next: "Next photo",
+    counter: (position, total) => `${position} of ${total}`,
+    altFallback: "Haircut by BarberPlug",
   },
   notFound: {
     title: "Page not found",
@@ -114,6 +141,19 @@ const bg: Messages = {
     phone: "Телефон",
     followUs: "Последвайте ни",
     rights: "Всички права запазени.",
+  },
+  gallery: {
+    loading: "Зареждане на снимките…",
+    empty: "Снимките идват скоро.",
+    error: "Галерията не можа да се зареди.",
+    retry: "Опитай отново",
+    viewer: "Преглед на снимки",
+    openPhoto: (position) => `Отвори снимка ${position}`,
+    close: "Затвори",
+    previous: "Предишна снимка",
+    next: "Следваща снимка",
+    counter: (position, total) => `${position} от ${total}`,
+    altFallback: "Подстригване в BarberPlug",
   },
   notFound: {
     title: "Страницата не е намерена",

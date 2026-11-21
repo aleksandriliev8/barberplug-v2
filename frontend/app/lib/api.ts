@@ -5,7 +5,7 @@
  */
 
 const CSRF_COOKIE = "XSRF-TOKEN";
-const CSRF_HEADER = "X-XSRF-TOKEN";
+export const CSRF_HEADER = "X-XSRF-TOKEN";
 
 /** A failed API call. `code` and `fields` are the backend's stable error codes. */
 export class ApiError extends Error {
@@ -27,7 +27,8 @@ export function readCookie(name: string): string | undefined {
   return match ? decodeURIComponent(match.slice(prefix.length)) : undefined;
 }
 
-async function ensureCsrfToken(): Promise<string | undefined> {
+/** The CSRF token, fetching the cookie first if the browser has none yet. */
+export async function ensureCsrfToken(): Promise<string | undefined> {
   if (!readCookie(CSRF_COOKIE)) {
     await fetch("/api/auth/csrf", { credentials: "same-origin" });
   }
@@ -35,7 +36,7 @@ async function ensureCsrfToken(): Promise<string | undefined> {
 }
 
 type Options = {
-  method?: "GET" | "POST" | "PUT" | "DELETE";
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   body?: unknown;
 };
 

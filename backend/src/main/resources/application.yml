@@ -16,6 +16,11 @@ spring:
     open-in-view: false
   flyway:
     enabled: true
+  servlet:
+    multipart:
+      # MASTER.md: JPEG/PNG/WebP up to 15 MB per photo.
+      max-file-size: 15MB
+      max-request-size: 16MB
 
 server:
   port: ${PORT:8080}
@@ -23,6 +28,10 @@ server:
   # Behind the ALB: trust X-Forwarded-For from private addresses, so the
   # login rate limit sees the Visitor's IP instead of the load balancer's.
   forward-headers-strategy: native
+  tomcat:
+    # Read (and discard) oversized uploads so the browser gets the 413 answer
+    # instead of a dropped connection.
+    max-swallow-size: 20MB
   servlet:
     session:
       timeout: 8h
@@ -33,6 +42,14 @@ server:
         same-site: lax
 
 barberplug:
+  storage:
+    # Defaults are for LocalStack in docker-compose.yml. Production sets STORAGE_ENDPOINT
+    # empty (real S3), the CloudFront URL, and STORAGE_CREATE_BUCKET=false (Terraform owns it).
+    bucket: ${STORAGE_BUCKET:barberplug-gallery}
+    region: ${AWS_REGION:eu-central-1}
+    endpoint: ${STORAGE_ENDPOINT:http://localhost:4566}
+    public-base-url: ${STORAGE_PUBLIC_BASE_URL:http://localhost:4566/barberplug-gallery}
+    create-bucket: ${STORAGE_CREATE_BUCKET:true}
   owner:
     # Only used to create the Owner on first start (ADR-0006).
     email: ${OWNER_EMAIL:}
